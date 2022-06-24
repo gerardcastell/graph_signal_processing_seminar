@@ -46,7 +46,7 @@ title('Scatter plot. Normalized Laplacian. 2 clusters')
 
 figure(3)
 h_r=gscatter(veps(:,1), veps(:,2), data_label_n);
-title('Sparcification using the real labels')
+titble('Sparcification using the real labels')
 
 %We repeat it with a different number of clusters
 k=3;
@@ -64,7 +64,7 @@ k=2;
 idx_L=kmeans(veps_L(:,1:2),k);
 
 figure(5)
-h_un=gscatter(veps_L(:,1), veps_L(:,2), idx_L);
+h=gscatter(veps_L(:,1), veps_L(:,2), idx_L);
 title('Scatter plot. Unormalized Laplacian. 2 clusters')
 
 % Random-walk Laplacian matrix
@@ -74,5 +74,5 @@ rwL=D_inv*L;
 k=2;
 idx_rw=kmeans(veps_rw(:,1:2),k);
 figure(6)
-h_rw=gscatter(veps_rw(:,1), veps_rw(:,2), idx_rw);
+h6=gscatter(veps_rw(:,1), veps_rw(:,2), idx_rw);
 title('Scatter plot. Random-walk Laplacian. 2 clusters')
