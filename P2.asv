@@ -1,4 +1,3 @@
-clear all
 %% 1.Reading and cleanning up the data
 data = readtable('agaricus-lepiota.txt','ReadVariableNames',false);
 data(:,12)=[];
@@ -39,6 +38,8 @@ k=2;
 idx=kmeans(veps(:,1:2),k);
 
 %% 5. Performance evaluation & 6.Visual inspection
+confchart = figure;
+confusionchart(data_label_n, idx)
 C=confusionmat(data_label_n, idx);
 figure(2)
 h=gscatter(veps(:,1), veps(:,2), idx);
@@ -46,15 +47,29 @@ title('Scatter plot. Normalized Laplacian. 2 clusters')
 
 figure(3)
 h_r=gscatter(veps(:,1), veps(:,2), data_label_n);
-titble('Sparcification using the real labels')
+title('Sparcification using the real labels')
 
-%We repeat it with a different number of clusters
-k=3;
-idx3=kmeans(veps(:,1:3),k);
-C3=confusionmat(data_label_n, idx3);
-figure(4)
-h3=scatter3(veps(:,1), veps(:,2), veps(:,3),idx3);
-title('Scatter plot. Normalized Laplacian. 3 clusters')
+%% We repeat it with a different number of clusters
+% k=3;
+% idx3=kmeans(veps(:,1:3),k);
+% C3=confusionmat(data_label_n, idx3);
+% figure(4)
+% formats = [".r", ".b", ".g"];
+% 
+% h3=scatter3(veps(:,1), veps(:,2), veps(:,3),idx3);
+% title('Scatter plot. Normalized Laplacian. 3 clusters')
+cAssignments = figure;
+formats = [".r", ".b", ".g"];
+
+for i = 1:3
+    points = veps(idx3 == i, 1:3);
+    scatter3(points(:, 1), points(:, 2), points(:, 3), formats(i), 'DisplayName', "Cluster " + i);
+    hold on
+end
+
+legend('Location', 'Best')
+title 'Scatter plot. Normalized Laplacian. 3 clusters'
+hold off
 
 %% 7. Alternative embeddings and graoh sparcification
 
@@ -64,7 +79,7 @@ k=2;
 idx_L=kmeans(veps_L(:,1:2),k);
 
 figure(5)
-h=gscatter(veps_L(:,1), veps_L(:,2), idx_L);
+h_un=gscatter(veps_L(:,1), veps_L(:,2), idx_L);
 title('Scatter plot. Unormalized Laplacian. 2 clusters')
 
 % Random-walk Laplacian matrix
@@ -74,5 +89,6 @@ rwL=D_inv*L;
 k=2;
 idx_rw=kmeans(veps_rw(:,1:2),k);
 figure(6)
-h6=gscatter(veps_rw(:,1), veps_rw(:,2), idx_rw);
+h_rw=gscatter(veps_rw(:,1), veps_rw(:,2), idx_rw);
 title('Scatter plot. Random-walk Laplacian. 2 clusters')
+
