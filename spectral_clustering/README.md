@@ -160,7 +160,7 @@ misclassifying that mixed in the other cluster.\
 We also obtained the confusion matrix for the previous configuration:
 
 ![Confusion matrix of configuration k=2 and Normalized Laplacian
-$(L_{sn})$](confusionk2.png){#fig:confusionk2NormLaplacian width="9cm"}
+$(L_{sn})$](images/confusionk2.png){#fig:confusionk2NormLaplacian width="9cm"}
 
 So with the aim of find a better segregation results we try using k=3
 and recompute the confusion matrix and plot again the results:
