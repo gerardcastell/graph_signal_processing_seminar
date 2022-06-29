@@ -62,24 +62,35 @@ for i=0:0.05:10
     th_table = [th_table; PD PF];
 end
 figure(4);
-plot(th_table(:,2), th_table(:,1));
-title('ROC with Common Neighbors index')
+plot(th_table(:,2), th_table(:,1),'DisplayName','Common Neighbors');
+title('ROC space')
+xlabel('False Positive Rate (1 - Specificity)') 
+ylabel('True Positive Rate (Sensitivity)')
 
+
+% legend({'Common Neighbors','Jaccard','Adamic–Adar'},'Location','southwest')
+
+hold on
 %% Other link prediction methods
 th_table = [];
 for i=0:0.05:10
     [PD, PF] = CalcProbs(i,G,rm, @JScoring);
     th_table = [th_table; PD PF];
 end
-figure(5);
-plot(th_table(:,2), th_table(:,1));
-title('ROC with Jaccard index')
+%figure(5);
+plot(th_table(:,2), th_table(:,1), 'DisplayName','Jaccard');
+%title('ROC with Jaccard index')
 %% 
 th_table = [];
 for i=0:0.05:10 
     [PD, PF] = CalcProbs(i,G,rm, @AAScoring);
     th_table = [th_table; PD PF];
 end
-figure(6);
-plot(th_table(:,2), th_table(:,1));
-title('ROC with Adamic–Adar index')
+%figure(6);
+plot(th_table(:,2), th_table(:,1), 'DisplayName','Adamic–Adar');
+plot([0 1], [0 1],'--', 'DisplayName','Random Classifier')
+%title('ROC with Adamic–Adar index')
+legend('Location','southeast')
+
+
+hold off
