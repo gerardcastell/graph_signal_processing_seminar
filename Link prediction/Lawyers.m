@@ -1,4 +1,5 @@
-clear all
+clear all;
+close all;
 %% Reading and cleaning up the data
 data = readtable('ELwork36.dat','ReadVariableNames',false);
 data_m=table2array(data);
@@ -12,5 +13,8 @@ X=triu(X);
 X=X-diag(diag(X));
 [row,col] = find(X);
 rc=[row, col];
+
+%% 
+rc(1, 1) = []
 
 
