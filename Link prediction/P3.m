@@ -91,3 +91,8 @@ plot([0 1], [0 1],'--', 'DisplayName','Random Classifier')
 
 legend('Location','southeast')
 hold off
+
+%% AUC
+auc_cn = trapz(flip(th_table_cn(:,2)), flip(th_table_cn(:,1)))
+auc_j = trapz(flip(th_table_j(:,2)), flip(th_table_j(:,1)))
+auc__aa = trapz(flip(th_table_aa(:,2)), flip(th_table_aa(:,1)))
