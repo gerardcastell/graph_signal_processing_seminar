@@ -1,4 +1,4 @@
-function [PD,PF] = CalcProbs(th,G,rm)
+function [PD,PF] = CalcProbs(th,G,rm, scoring)
     %CALCPROBS Given a graph, a random hidding of the edges and a threshold
     %it returns the Prob. of Detection and the Prob. of False Alarm.
     s_rm = rm(:,1);
@@ -10,7 +10,7 @@ function [PD,PF] = CalcProbs(th,G,rm)
     
     for i = 1:size(rm,1)%Changed rm for rc -> Score just for unknown edges
 %         disp(['Checking edge (', num2str(rm(i,1)), ',', num2str(rm(i,2)), ')']);
-        score = CNScoring(G_obs, rm(i,1), rm(i,2));
+        score = scoring(G_obs, rm(i,1), rm(i,2));
         if score>=th
 %            disp(['Edge (', num2str(rm(i,1)), ',', num2str(rm(i,2)), ') is added...'])
            G_pred = addedge(G_pred, rm(i,1), rm(i,2), 1);

@@ -53,14 +53,33 @@ plot(G_pred)
 title('Graph predicted');
 
 %% Probability of detection and false alarm
-[PD, PF] = CalcProbs(5,G,rm);
+[PD, PF] = CalcProbs(5,G,rm, @CNScoring);
 
 %% ROC curve
 th_table = [];
-for i=0:8 
-    [PD, PF] = CalcProbs(i,G,rm);
+for i=0:0.05:10 
+    [PD, PF] = CalcProbs(i,G,rm, @CNScoring);
     th_table = [th_table; PD PF];
 end
-
+figure(4);
 plot(th_table(:,2), th_table(:,1));
 title('ROC with Common Neighbors index')
+
+%% Other link prediction methods
+th_table = [];
+for i=0:0.05:10
+    [PD, PF] = CalcProbs(i,G,rm, @JScoring);
+    th_table = [th_table; PD PF];
+end
+figure(5);
+plot(th_table(:,2), th_table(:,1));
+title('ROC with Jaccard index')
+%% 
+th_table = [];
+for i=0:0.05:10 
+    [PD, PF] = CalcProbs(i,G,rm, @AAScoring);
+    th_table = [th_table; PD PF];
+end
+figure(6);
+plot(th_table(:,2), th_table(:,1));
+title('ROC with Adamic–Adar index')
