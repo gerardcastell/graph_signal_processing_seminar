@@ -30,7 +30,7 @@ title('Graph without 126 edges');
 
 
 %% Getting score and correcting
-th=10;
+th=5;
 G_pred = G_obs;
 predicted_true = [];
 
