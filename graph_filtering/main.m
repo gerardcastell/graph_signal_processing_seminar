@@ -44,4 +44,7 @@ P_no_hawai(idx_to_rm(1),:)=[];
 P_no_hawai(idx_to_rm(2),:)=[];
 P_no_hawai(idx_to_rm(3),:)=[];
 
+figure()
+G_no_hawai = gsp_graph(A_no_hawai, P_no_hawai);
+gsp_plot_graph(G_no_hawai);
 
