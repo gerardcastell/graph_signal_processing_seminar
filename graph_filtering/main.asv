@@ -33,15 +33,12 @@ for j=1:size(hawai_points,1)
 end
 
 A_no_hawai = A;
-P_no_hawai = P;
 A_no_hawai(idx_to_rm(1),:)=[];
 A_no_hawai(idx_to_rm(2),:)=[];
 A_no_hawai(idx_to_rm(3),:)=[];
 A_no_hawai(:,idx_to_rm(1))=[];
-A_no_hawai(:,idx_to_rm(2))=[];
-A_no_hawai(:,idx_to_rm(3))=[];
-P_no_hawai(idx_to_rm(1),:)=[];
-P_no_hawai(idx_to_rm(2),:)=[];
-P_no_hawai(idx_to_rm(3),:)=[];
+A_no_hawai(idx_to_rm(2),:)=[];
+A_no_hawai(idx_to_rm(3),:)=[];
+
 
 
