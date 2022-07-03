@@ -67,34 +67,34 @@ G_u = gsp_graph(A_u, P_no_hawai);
 gsp_plot_graph(G_u);
 title('Undirected Weather graph');
 %% Low pass filter
-% dia = randperm(365,1);
-% x = Y_no_hawai(:,dia);
-% G_u = gsp_compute_fourier_basis(G_u);
-% 
-% h_hat_l= 1./(1+G_u.e);
-% x_hat = G_u.U' * x;
-% 
-% y_hat_l = h_hat_l.*x_hat;
-% y_l = G_u.U*y_hat_l;
+dia = randperm(365,1);
+x = Y_no_hawai(:,dia);
+G_u = gsp_compute_fourier_basis(G_u);
 
-% %% Plot results
-% figure(5);
-% param.climits=[min(x)-0.5, max(x)+0.5];
-% subplot(211); gsp_plot_signal(G_u,x,param); title(['Original data of day ', num2str(dia)]);
-% subplot(212); gsp_plot_signal(G_u,y_l,param); title(['Result of applying low pass filter on the day ', num2str(dia)]);
-% 
-% %% High pass filter
-% lambda_max = max(G_u.e);
-% h_hat_h= 1./(1-(G_u.e-lambda_max));
-% y_hat_h = h_hat_h.*x_hat;
-% y_h = G_u.U*y_hat_h;
+h_hat_l= 1./(1+G_u.e);
+x_hat = G_u.U' * x;
 
-% %% Plot results
-% figure(6);
-% param.climits=[min(x)-0.5, max(x)+0.5];
-% subplot(211); gsp_plot_signal(G_u,x,param); title(['Original data of day ', num2str(dia)]);
-% param.climits=[min(y_h)-0.5, max(y_h)+0.5];
-% subplot(212); gsp_plot_signal(G_u,y_h,param); title(['Result of applying high pass filter on the day ', num2str(dia)]);;
+y_hat_l = h_hat_l.*x_hat;
+y_l = G_u.U*y_hat_l;
+
+%% Plot results
+figure(5);
+param.climits=[min(x)-0.5, max(x)+0.5];
+subplot(211); gsp_plot_signal(G_u,x,param); title(['Original data of day ', num2str(dia)]);
+subplot(212); gsp_plot_signal(G_u,y_l,param); title(['Result of applying low pass filter on the day ', num2str(dia)]);
+
+%% High pass filter
+lambda_max = max(G_u.e);
+h_hat_h= 1./(1-(G_u.e-lambda_max));
+y_hat_h = h_hat_h.*x_hat;
+y_h = G_u.U*y_hat_h;
+
+%% Plot results
+figure(6);
+param.climits=[min(x)-0.5, max(x)+0.5];
+subplot(211); gsp_plot_signal(G_u,x,param); title(['Original data of day ', num2str(dia)]);
+param.climits=[min(y_h)-0.5, max(y_h)+0.5];
+subplot(212); gsp_plot_signal(G_u,y_h,param); title(['Result of applying high pass filter on the day ', num2str(dia)]);;
 
 
 %% Testing four seasons
